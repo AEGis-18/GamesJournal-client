@@ -20,10 +20,11 @@ type ResponseToken = {
   type: "Bearer";
 };
 
-type AuthContextType = {
+export type AuthContextType = {
   auth: ResponseToken | undefined;
   setAuth: React.Dispatch<React.SetStateAction<ResponseToken | undefined>>;
   loading: boolean;
+  isAuthenticated: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -41,7 +42,7 @@ export const useAuth = () => {
 export function AuthProvider({ children }: Props) {
   const [auth, setAuth] = useState<ResponseToken | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-
+  const isAuthenticated = !!auth;
   useEffect(() => {
     const fetchAccess = async () => {
       try {
@@ -113,7 +114,7 @@ export function AuthProvider({ children }: Props) {
   }, [auth]);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, loading }}>
+    <AuthContext.Provider value={{ auth, setAuth, loading, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
