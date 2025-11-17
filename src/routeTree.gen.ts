@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GamesRouteImport } from './routes/games'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ const SignUpRoute = SignUpRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -50,6 +56,7 @@ const AuthenticatedPrivateTestRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/games': typeof GamesRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/private-test': typeof AuthenticatedPrivateTestRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/games': typeof GamesRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/private-test': typeof AuthenticatedPrivateTestRoute
@@ -66,20 +74,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
+  '/games': typeof GamesRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/_authenticated/private-test': typeof AuthenticatedPrivateTestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/login' | '/sign-up' | '/private-test'
+  fullPaths: '/' | '/about' | '/games' | '/login' | '/sign-up' | '/private-test'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/login' | '/sign-up' | '/private-test'
+  to: '/' | '/about' | '/games' | '/login' | '/sign-up' | '/private-test'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/about'
+    | '/games'
     | '/login'
     | '/sign-up'
     | '/_authenticated/private-test'
@@ -89,6 +99,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
+  GamesRoute: typeof GamesRoute
   LoginRoute: typeof LoginRoute
   SignUpRoute: typeof SignUpRoute
 }
@@ -107,6 +118,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -156,6 +174,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
+  GamesRoute: GamesRoute,
   LoginRoute: LoginRoute,
   SignUpRoute: SignUpRoute,
 }
