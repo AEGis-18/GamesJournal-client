@@ -1,4 +1,5 @@
 import { useGames } from "../hooks/useGames";
+import DisplayGame from "./DisplayGame";
 
 export default function GamesCovers() {
   const { data, isLoading, isError, error } = useGames(1);
@@ -19,10 +20,7 @@ export default function GamesCovers() {
     <div>
       <ul>
         {data.content.map((game, index) => (
-          <li key={index}>
-            <img src={game.coverUrl} alt={game.title} />
-            <h3>{game.title}</h3>
-          </li>
+          <DisplayGame game={game} index={index}></DisplayGame>
         ))}
       </ul>
     </div>

@@ -15,18 +15,25 @@ export interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <>
-      <div className="p-2">
-        <header>
-          <Link to="/">
-            <h3>Welcome Home!</h3>
+      <div className="grid grid-cols-2">
+        <header className="flex justify-start ">
+          <Link to="/" className="hover:bg-white hover:text-black p-4 m-0 ">
+            Welcome Home!
           </Link>
         </header>
-        <nav>
-          <Link to="/private-test">Private Test</Link>
-          <br />
-          <Link to="/about">About</Link>
-          <br />
-          <Link to="/games">Games</Link>
+        <nav className="flex justify-end">
+          <Link to="/games" className="hover:bg-white hover:text-black p-4">
+            Games
+          </Link>
+          <Link to="/about" className="hover:bg-white hover:text-black p-4">
+            About
+          </Link>
+          <Link
+            to="/private-test"
+            className="hover:bg-white hover:text-black p-4"
+          >
+            Private Test
+          </Link>
         </nav>
       </div>
       <Outlet />
