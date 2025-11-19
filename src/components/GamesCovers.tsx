@@ -18,9 +18,9 @@ export default function GamesCovers() {
 
   return (
     <div>
-      <ul>
-        {data.content.map((game, index) => (
-          <DisplayGame game={game} index={index}></DisplayGame>
+      <ul className="flex flex-wrap justify-center">
+        {data.content.map((game) => (
+          <DisplayGame key={game.id} game={game}></DisplayGame>
         ))}
       </ul>
     </div>
