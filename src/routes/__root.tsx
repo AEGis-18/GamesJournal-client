@@ -15,24 +15,31 @@ export interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <>
-      <div className="grid grid-cols-2">
-        <header className="flex justify-start ">
-          <Link to="/" className="hover:bg-white hover:text-black p-4 m-0 ">
-            Welcome Home!
+      <div className="grid grid-cols-2 mb-2 bg-neutral-900">
+        <header className="flex justify-start -skew-x-12 mx-2">
+          <Link to="/" className="hover:bg-white hover:text-black p-2 m-0 ">
+            <img src="./logo-alt.svg" className="h-10 w-10 skew-x-12" />
           </Link>
         </header>
-        <nav className="flex justify-end">
-          <Link to="/games" className="hover:bg-white hover:text-black p-4">
-            Games
+        <nav className="flex justify-end -skew-x-12 mr-2">
+          <Link
+            to="/games"
+            activeOptions={{ exact: true }}
+            className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
+          >
+            <h2 className="skew-x-12">Games</h2>
           </Link>
-          <Link to="/about" className="hover:bg-white hover:text-black p-4">
-            About
+          <Link
+            to="/about"
+            className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
+          >
+            <h2 className="skew-x-12">About</h2>
           </Link>
           <Link
             to="/private-test"
-            className="hover:bg-white hover:text-black p-4"
+            className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
           >
-            Private Test
+            <h2 className="skew-x-12">Private Test</h2>
           </Link>
         </nav>
       </div>
