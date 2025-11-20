@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { Game } from "../types/GameTypes";
 import { useAuth } from "./AuthProviders";
 import { Button } from "./ui/button";
@@ -30,6 +31,9 @@ export default function DisplayGame({ game }: { game: Game }) {
               Add
             </Button>
           )}
+          <Link to="/games/$gameSlug" params={{ gameSlug: game.slug }}>
+            Info
+          </Link>
         </div>
       </div>
     </li>

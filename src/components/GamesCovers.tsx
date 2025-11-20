@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useGames } from "../hooks/useGames";
+import { useAllGames } from "../hooks/useAllGames";
 import DisplayGame from "./DisplayGame";
 import { Pagination } from "./Pagination";
 
 export default function GamesCovers() {
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError, error } = useGames(page);
+  const { data, isLoading, isError, error } = useAllGames(page);
 
   if (isLoading) {
     return <h1>Loading...</h1>;

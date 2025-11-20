@@ -6,6 +6,16 @@ export interface Game {
   genres: string[];
 }
 
+export interface GameInfo {
+  slug: string;
+  title: string;
+  summary: string;
+  coverUrl: string;
+  genres: string[];
+  developers: string[];
+  publishers: string[];
+}
+
 export interface Pageable {
   pageNumber: number;
   pageSize: number;
