@@ -6,6 +6,7 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { type AuthContextType } from "../components/AuthProviders";
 import type { QueryClient } from "@tanstack/react-query";
+import { Footer } from "@/components/Footer";
 
 export interface MyRouterContext {
   auth: AuthContextType;
@@ -14,38 +15,44 @@ export interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <>
-      <div className="grid grid-cols-2 mb-2 bg-neutral-900">
-        <header className="flex justify-start -skew-x-12 mx-2">
-          <Link to="/" className="hover:bg-white hover:text-black p-2 m-0 ">
-            <img src="./logo-alt.svg" className="h-10 w-10 skew-x-12" />
-          </Link>
-        </header>
-        <nav className="flex justify-end -skew-x-12 mr-2">
-          <Link
-            to="/games"
-            activeOptions={{ exact: true }}
-            className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
-          >
-            <h2 className="skew-x-12">Games</h2>
-          </Link>
-          <Link
-            to="/about"
-            className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
-          >
-            <h2 className="skew-x-12">About</h2>
-          </Link>
-          <Link
-            to="/private-test"
-            className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
-          >
-            <h2 className="skew-x-12">Private Test</h2>
-          </Link>
-        </nav>
+    <div className="flex flex-col min-h-screen">
+      <div className="grow">
+        <div className="grid grid-cols-2 mb-2 bg-neutral-900">
+          <header className="flex justify-start -skew-x-12 mx-2">
+            <Link to="/" className="hover:bg-white hover:text-black p-2 m-0 ">
+              <img
+                src="../src/assets/logo-alt.svg"
+                className="h-10 w-10 skew-x-12"
+              />
+            </Link>
+          </header>
+          <nav className="flex justify-end -skew-x-12 mr-2">
+            <Link
+              to="/games"
+              activeOptions={{ exact: true }}
+              className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
+            >
+              <h2 className="skew-x-12">Games</h2>
+            </Link>
+            <Link
+              to="/about"
+              className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
+            >
+              <h2 className="skew-x-12">About</h2>
+            </Link>
+            <Link
+              to="/private-test"
+              className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
+            >
+              <h2 className="skew-x-12">Private Test</h2>
+            </Link>
+          </nav>
+        </div>
+        <Outlet />
       </div>
-      <Outlet />
+      <Footer />
       <TanStackRouterDevtools position="bottom-right" initialIsOpen={false} />
-    </>
+    </div>
   ),
 });
 
