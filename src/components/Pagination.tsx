@@ -1,0 +1,94 @@
+import { Button } from "./ui/button";
+import type { Dispatch, SetStateAction } from "react";
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardDoubleArrowRight,
+  MdOutlineKeyboardDoubleArrowLeft,
+} from "react-icons/md";
+
+type PaginationProps = {
+  page: number;
+  last: boolean;
+  setPage: Dispatch<SetStateAction<number>>;
+  totalPages: number;
+};
+
+export function Pagination({
+  page,
+  last,
+  totalPages,
+  setPage,
+}: PaginationProps) {
+  function nextPage() {
+    if (last) {
+      setPage(totalPages);
+      return;
+    }
+    setPage((prevPage) => prevPage + 1);
+    console.log(page);
+    return;
+  }
+
+  function previousPage() {
+    if (page !== 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
+    console.log(page);
+    return;
+  }
+  function lastPage() {
+    setPage(totalPages);
+    console.log(page);
+    return;
+  }
+  function firstPage() {
+    setPage(1);
+    console.log(page);
+    return;
+  }
+
+  const isFirstPage = page === 1;
+  const isLastPage = page === totalPages;
+  return (
+    <div className="flex justify-center m-8 mb-10 gap-1">
+      <Button
+        variant={"default"}
+        className={`bg-blue-500 ${isFirstPage ? "bg-gray-600" : ""}`}
+        onClick={firstPage}
+        disabled={isFirstPage}
+      >
+        <MdOutlineKeyboardDoubleArrowLeft />
+      </Button>
+
+      <Button
+        variant={"default"}
+        className={`bg-blue-500 ${isFirstPage ? "bg-gray-600" : ""}`}
+        onClick={previousPage}
+        disabled={isFirstPage}
+      >
+        <MdOutlineKeyboardArrowLeft />
+      </Button>
+
+      <Button className="">{page}</Button>
+
+      <Button
+        variant={"default"}
+        className={`bg-blue-500 ${isLastPage ? "bg-gray-600" : ""}`}
+        onClick={nextPage}
+        disabled={isLastPage}
+      >
+        <MdOutlineKeyboardArrowRight />
+      </Button>
+
+      <Button
+        variant={"default"}
+        className={`bg-blue-500 ${isLastPage ? "bg-gray-600" : ""}`}
+        onClick={lastPage}
+        disabled={isLastPage}
+      >
+        <MdOutlineKeyboardDoubleArrowRight />
+      </Button>
+    </div>
+  );
+}

@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useGames } from "../hooks/useGames";
 import DisplayGame from "./DisplayGame";
+import { Pagination } from "./Pagination";
 
 export default function GamesCovers() {
-  const { data, isLoading, isError, error } = useGames(1);
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError, error } = useGames(page);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -17,12 +20,26 @@ export default function GamesCovers() {
   }
 
   return (
-    <div>
-      <ul className="flex flex-wrap justify-center">
-        {data.content.map((game) => (
-          <DisplayGame key={game.id} game={game}></DisplayGame>
-        ))}
-      </ul>
+    <div className="flex flex-col items-end">
+      <Pagination
+        page={page}
+        last={data.last}
+        totalPages={data.totalPages - 1}
+        setPage={setPage}
+      ></Pagination>
+      <div className="rounded-md shadow-md bg-neutral-900 shadow-blue-800 mx-4 py-4">
+        <ul className="flex flex-wrap justify-center">
+          {data.content.map((game) => (
+            <DisplayGame key={game.id} game={game}></DisplayGame>
+          ))}
+        </ul>
+      </div>
+      <Pagination
+        page={page}
+        last={data.last}
+        totalPages={data.totalPages - 1}
+        setPage={setPage}
+      ></Pagination>
     </div>
   );
 }

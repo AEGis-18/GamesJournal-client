@@ -1,7 +1,10 @@
 import type { Game } from "../types/GameTypes";
+import { useAuth } from "./AuthProviders";
 import { Button } from "./ui/button";
 
 export default function DisplayGame({ game }: { game: Game }) {
+  const { isAuthenticated } = useAuth();
+
   return (
     <li
       key={game.id}
@@ -17,14 +20,16 @@ export default function DisplayGame({ game }: { game: Game }) {
           {game.title}
         </h4>
         <div>
-          <Button
-            onClick={() => console.log("click")}
-            variant={"outline"}
-            size={"sm"}
-            className="bg-green-700"
-          >
-            Add
-          </Button>
+          {isAuthenticated && (
+            <Button
+              onClick={() => console.log("click")}
+              variant={"outline"}
+              size={"sm"}
+              className="bg-green-700"
+            >
+              Add
+            </Button>
+          )}
         </div>
       </div>
     </li>
