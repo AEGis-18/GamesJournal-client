@@ -2,6 +2,7 @@ import type { GameInfo, GameResponse } from "../types/GameTypes";
 import { Api } from "./base.api";
 
 const BASE_URL = "games/";
+
 export async function getAllGames(
   page: number,
   size: number

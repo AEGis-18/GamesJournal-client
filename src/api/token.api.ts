@@ -1,24 +1,39 @@
-import { Api } from "./base.api";
+import type { ResponseToken } from "@/components/AuthProviders";
+import axios from "axios";
 
-const LOGIN_URL = "token/";
-const REFRESH_URL = "token/refresh/";
-const SIGN_OUT_URL = "signout/";
-const SIGN_UP_URL = "register/";
+export const AuthApi = axios.create({
+  baseURL: "http://localhost:8080/api/auth/",
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true,
+});
 
-export const login = (username: string, password: string) => {
-  return Api.post(LOGIN_URL, { username: username, password: password });
-};
+const LOGIN_URL = "login";
+const REFRESH_URL = "refresh-token";
+const SIGN_OUT_URL = "sign-out";
+const SIGN_UP_URL = "signup";
+
+export async function login(
+  username: string,
+  password: string
+): Promise<ResponseToken> {
+  const { data } = await AuthApi.post(LOGIN_URL, {
+    username: username,
+    password: password,
+  });
+
+  return data;
+}
 
 export const refresh = () => {
-  return Api.post(REFRESH_URL, {});
+  return AuthApi.post(REFRESH_URL, {});
 };
 
 export const signOut = () => {
-  return Api.post(SIGN_OUT_URL, {});
+  return AuthApi.post(SIGN_OUT_URL, {});
 };
 
 export const signUp = (username: string, email: string, password: string) => {
-  return Api.post(SIGN_UP_URL, {
+  return AuthApi.post(SIGN_UP_URL, {
     username: username,
     email: email,
     password: password,

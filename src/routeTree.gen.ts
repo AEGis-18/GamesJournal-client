@@ -16,6 +16,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GamesIndexRouteImport } from './routes/games/index'
 import { Route as GamesGameSlugRouteImport } from './routes/games/$gameSlug'
+import { Route as AuthenticatedSignOutRouteImport } from './routes/_authenticated/sign-out'
 import { Route as AuthenticatedPrivateTestRouteImport } from './routes/_authenticated/private-test'
 
 const SignUpRoute = SignUpRouteImport.update({
@@ -52,6 +53,11 @@ const GamesGameSlugRoute = GamesGameSlugRouteImport.update({
   path: '/games/$gameSlug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSignOutRoute = AuthenticatedSignOutRouteImport.update({
+  id: '/sign-out',
+  path: '/sign-out',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedPrivateTestRoute =
   AuthenticatedPrivateTestRouteImport.update({
     id: '/private-test',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/private-test': typeof AuthenticatedPrivateTestRoute
+  '/sign-out': typeof AuthenticatedSignOutRoute
   '/games/$gameSlug': typeof GamesGameSlugRoute
   '/games': typeof GamesIndexRoute
 }
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/private-test': typeof AuthenticatedPrivateTestRoute
+  '/sign-out': typeof AuthenticatedSignOutRoute
   '/games/$gameSlug': typeof GamesGameSlugRoute
   '/games': typeof GamesIndexRoute
 }
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/_authenticated/private-test': typeof AuthenticatedPrivateTestRoute
+  '/_authenticated/sign-out': typeof AuthenticatedSignOutRoute
   '/games/$gameSlug': typeof GamesGameSlugRoute
   '/games/': typeof GamesIndexRoute
 }
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/private-test'
+    | '/sign-out'
     | '/games/$gameSlug'
     | '/games'
   fileRoutesByTo: FileRoutesByTo
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/private-test'
+    | '/sign-out'
     | '/games/$gameSlug'
     | '/games'
   id:
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/_authenticated/private-test'
+    | '/_authenticated/sign-out'
     | '/games/$gameSlug'
     | '/games/'
   fileRoutesById: FileRoutesById
@@ -180,6 +192,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesGameSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/sign-out': {
+      id: '/_authenticated/sign-out'
+      path: '/sign-out'
+      fullPath: '/sign-out'
+      preLoaderRoute: typeof AuthenticatedSignOutRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/private-test': {
       id: '/_authenticated/private-test'
       path: '/private-test'
@@ -192,10 +211,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedPrivateTestRoute: typeof AuthenticatedPrivateTestRoute
+  AuthenticatedSignOutRoute: typeof AuthenticatedSignOutRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedPrivateTestRoute: AuthenticatedPrivateTestRoute,
+  AuthenticatedSignOutRoute: AuthenticatedSignOutRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

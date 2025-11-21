@@ -1,5 +1,4 @@
 import { useGame } from "@/hooks/useGame";
-import { Card, CardContent } from "./ui/card";
 
 export function GameInfo({ gameSlug }: { gameSlug: string }) {
   const { data, isLoading, isError, error } = useGame(gameSlug);

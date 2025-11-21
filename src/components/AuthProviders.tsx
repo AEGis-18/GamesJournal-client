@@ -12,7 +12,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-type ResponseToken = {
+export type ResponseToken = {
   username: string;
   email: string;
   roles: "ROLE_USER" | "ROLE_ADMIN";
