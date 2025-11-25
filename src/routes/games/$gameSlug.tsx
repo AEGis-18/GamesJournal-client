@@ -1,5 +1,6 @@
 import { GameInfo } from "@/components/GameInfo";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import { MyCard } from "@/components/ui/MyCard";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/games/$gameSlug")({
@@ -14,11 +15,11 @@ function RouteComponent() {
   return (
     <>
       <div className="flex justify-center  min-h-screen">
-        <Card className="rounded-md border-none shadow-md bg-neutral-900 shadow-blue-800 mx-4 py-4">
+        <MyCard className="rounded-md border-none shadow-md bg-neutral-900 shadow-blue-800 mx-4 py-4">
           <CardContent>
             <GameInfo gameSlug={gameSlug}></GameInfo>
           </CardContent>
-        </Card>
+        </MyCard>
       </div>
     </>
   );
