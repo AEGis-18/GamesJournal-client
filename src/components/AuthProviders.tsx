@@ -48,7 +48,7 @@ export function AuthProvider({ children }: Props) {
       try {
         console.log("Checking access cookies");
         const { data }: { data: ResponseToken } = await axios.post(
-          "http://localhost:8080/api/auth/refreshtoken/",
+          "http://localhost:8080/api/auth/refresh-token",
           {},
           { withCredentials: true }
         );
