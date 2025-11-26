@@ -1,10 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { useAuth } from "./AuthProviders";
+import UserMenu from "./UserMenu";
 
 export default function Header() {
-  const { auth } = useAuth();
   return (
-    <div className="grid grid-cols-2 mb-2 bg-neutral-900">
+    <div className="grid grid-cols-2 mb-2 bg-neutral-900 relative z-40">
       <header className="flex justify-start -skew-x-12 mx-2">
         <Link to="/" className="hover:bg-white hover:text-black p-2 m-0 ">
           <img
@@ -31,11 +30,11 @@ export default function Header() {
           to="/private-test"
           className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
         >
-          <h2 className="skew-x-12">Private Test</h2>
+          <h2 className="skew-x-12">Private</h2>
         </Link>
-        <h3 className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4">
-          {auth ? auth.username : "Guest"}
-        </h3>
+        <div>
+          <UserMenu />
+        </div>
       </nav>
     </div>
   );

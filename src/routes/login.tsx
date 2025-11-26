@@ -1,5 +1,5 @@
 import { LoginForm } from "@/components/LoginForm";
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/login")({
   validateSearch: (search) => ({
@@ -12,12 +12,15 @@ export const Route = createFileRoute("/login")({
   },
   component: LoginPage,
 });
+
 function LoginPage() {
   const { redirect } = Route.useSearch();
-  const navigate = Route.useNavigate();
+  const navigate = useNavigate();
+  // const search = Route.useSearch();
 
   function handleSuccess(): void {
     console.log("first");
+    console.log(redirect);
     navigate({ to: redirect });
   }
   return <LoginForm onSuccess={handleSuccess}></LoginForm>;
