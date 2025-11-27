@@ -21,17 +21,24 @@ export default function Header() {
           <h2 className="skew-x-12">Games</h2>
         </Link>
         <Link
+          to="/journal"
+          activeOptions={{ exact: true }}
+          className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
+        >
+          <h2 className="skew-x-12">My Journal</h2>
+        </Link>
+        {/* <Link
           to="/about"
           className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
         >
           <h2 className="skew-x-12">About</h2>
-        </Link>
-        <Link
+        </Link> */}
+        {/* <Link
           to="/private-test"
           className="[&.active]:bg-blue-500  [&.active]:text-white hover:bg-white hover:text-black p-4"
         >
           <h2 className="skew-x-12">Private</h2>
-        </Link>
+        </Link> */}
         <div>
           <UserMenu />
         </div>

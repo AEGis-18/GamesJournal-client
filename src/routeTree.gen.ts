@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as JournalRouteImport } from './routes/journal'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,6 +28,11 @@ const SignUpRoute = SignUpRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -68,6 +74,7 @@ const AuthenticatedPrivateTestRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/journal': typeof JournalRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/private-test': typeof AuthenticatedPrivateTestRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/journal': typeof JournalRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/private-test': typeof AuthenticatedPrivateTestRoute
@@ -90,6 +98,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
+  '/journal': typeof JournalRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
   '/_authenticated/private-test': typeof AuthenticatedPrivateTestRoute
@@ -102,6 +111,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/journal'
     | '/login'
     | '/sign-up'
     | '/private-test'
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/journal'
     | '/login'
     | '/sign-up'
     | '/private-test'
@@ -123,6 +134,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/about'
+    | '/journal'
     | '/login'
     | '/sign-up'
     | '/_authenticated/private-test'
@@ -135,6 +147,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
+  JournalRoute: typeof JournalRoute
   LoginRoute: typeof LoginRoute
   SignUpRoute: typeof SignUpRoute
   GamesGameSlugRoute: typeof GamesGameSlugRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -227,6 +247,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
+  JournalRoute: JournalRoute,
   LoginRoute: LoginRoute,
   SignUpRoute: SignUpRoute,
   GamesGameSlugRoute: GamesGameSlugRoute,
