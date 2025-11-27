@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAllGames } from "../hooks/useAllGames";
 import DisplayGame from "./DisplayGame";
 import { Pagination } from "./Pagination";
+import { SectionTitle } from "./SectionTitle";
 
 export default function GamesCovers() {
   const [page, setPage] = useState(1);
@@ -21,12 +22,15 @@ export default function GamesCovers() {
 
   return (
     <div className="flex flex-col items-end">
-      <Pagination
-        page={page}
-        last={data.last}
-        totalPages={data.totalPages - 1}
-        setPage={setPage}
-      ></Pagination>
+      <div className="flex flex-row justify-between items-center w-full flex-wrap">
+        <SectionTitle>All Games</SectionTitle>
+        <Pagination
+          page={page}
+          last={data.last}
+          totalPages={data.totalPages - 1}
+          setPage={setPage}
+        ></Pagination>
+      </div>
       <div className="rounded-md shadow-md bg-neutral-900 shadow-blue-800 mx-4 py-4">
         <ul className="flex flex-wrap justify-center">
           {data.content.map((game) => (

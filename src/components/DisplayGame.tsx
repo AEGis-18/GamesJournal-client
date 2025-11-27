@@ -9,7 +9,7 @@ export default function DisplayGame({ game }: { game: Game }) {
   return (
     <li
       key={game.id}
-      className="relative w-[200px] h-[300px] text-center group  hover:scale-[115%] hover:z-50 rounded-sm transition-transform ease-in "
+      className="relative w-[200px] h-[300px] text-center group  hover:scale-[115%] hover:z-50 rounded-none transition-transform ease-in "
     >
       <img
         src={game.coverUrl}
@@ -20,19 +20,23 @@ export default function DisplayGame({ game }: { game: Game }) {
         <h4 className=" text-white text-shadow-lg font-bold p-2 ">
           {game.title}
         </h4>
-        <div>
+        <div className="-skew-x-12">
           {isAuthenticated && (
             <Button
               onClick={() => console.log("click")}
-              variant={"outline"}
               size={"sm"}
-              className="bg-green-700"
+              className="bg-green-700 rounded-none hover:scale-[115%]"
             >
-              Add
+              <h3 className="skew-x-12"> Add</h3>
             </Button>
           )}
           <Link to="/games/$gameSlug" params={{ gameSlug: game.slug }}>
-            Info
+            <Button
+              className="bg-amber-500 rounded-none hover:scale-[115%]"
+              size={"sm"}
+            >
+              <h3 className="skew-x-12">Info</h3>
+            </Button>
           </Link>
         </div>
       </div>

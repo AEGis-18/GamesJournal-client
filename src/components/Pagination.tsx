@@ -51,44 +51,56 @@ export function Pagination({
   const isFirstPage = page === 1;
   const isLastPage = page === totalPages;
   return (
-    <div className="flex justify-center m-8 mb-10 gap-1">
-      <Button
-        variant={"default"}
-        className={`bg-blue-500 ${isFirstPage ? "bg-gray-600" : ""}`}
-        onClick={firstPage}
-        disabled={isFirstPage}
-      >
-        <MdOutlineKeyboardDoubleArrowLeft />
-      </Button>
-
-      <Button
-        variant={"default"}
-        className={`bg-blue-500 ${isFirstPage ? "bg-gray-600" : ""}`}
-        onClick={previousPage}
-        disabled={isFirstPage}
-      >
-        <MdOutlineKeyboardArrowLeft />
-      </Button>
-
+    <div className="flex justify-center  m-8  gap-1">
+      <div className="-skew-x-12">
+        <Button
+          variant={"default"}
+          className={`rounded-none bg-blue-500 ${isFirstPage ? "bg-gray-600" : ""}`}
+          onClick={firstPage}
+          disabled={isFirstPage}
+        >
+          <div className="skew-x-12">
+            <MdOutlineKeyboardDoubleArrowLeft />
+          </div>
+        </Button>
+      </div>
+      <div className="-skew-x-12">
+        <Button
+          variant={"default"}
+          className={`rounded-none bg-blue-500 ${isFirstPage ? "bg-gray-600" : ""}`}
+          onClick={previousPage}
+          disabled={isFirstPage}
+        >
+          <div className="skew-x-12">
+            <MdOutlineKeyboardArrowLeft />
+          </div>
+        </Button>
+      </div>
       <Button className="">{page}</Button>
-
-      <Button
-        variant={"default"}
-        className={`bg-blue-500 ${isLastPage ? "bg-gray-600" : ""}`}
-        onClick={nextPage}
-        disabled={isLastPage}
-      >
-        <MdOutlineKeyboardArrowRight />
-      </Button>
-
-      <Button
-        variant={"default"}
-        className={`bg-blue-500 ${isLastPage ? "bg-gray-600" : ""}`}
-        onClick={lastPage}
-        disabled={isLastPage}
-      >
-        <MdOutlineKeyboardDoubleArrowRight />
-      </Button>
+      <div className="-skew-x-12">
+        <Button
+          variant={"default"}
+          className={`rounded-none bg-blue-500 ${isLastPage ? "bg-gray-600" : ""}`}
+          onClick={nextPage}
+          disabled={isLastPage}
+        >
+          <div className="skew-x-12">
+            <MdOutlineKeyboardArrowRight />
+          </div>
+        </Button>
+      </div>
+      <div className="-skew-x-12">
+        <Button
+          variant={"default"}
+          className={`rounded-none bg-blue-500 ${isLastPage ? "bg-gray-600" : ""}`}
+          onClick={lastPage}
+          disabled={isLastPage}
+        >
+          <div className="skew-x-12">
+            <MdOutlineKeyboardDoubleArrowRight />
+          </div>
+        </Button>
+      </div>
     </div>
   );
 }
