@@ -1,5 +1,4 @@
 import { Button } from "./ui/button";
-import type { Dispatch, SetStateAction } from "react";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
@@ -10,7 +9,7 @@ import {
 type PaginationProps = {
   page: number;
   last: boolean;
-  setPage: Dispatch<SetStateAction<number>>;
+  setPage: (value: number) => void;
   totalPages: number;
 };
 
@@ -25,23 +24,25 @@ export function Pagination({
       setPage(totalPages);
       return;
     }
-    setPage((prevPage) => prevPage + 1);
+    setPage(page + 1);
     console.log(page);
     return;
   }
 
   function previousPage() {
     if (page !== 1) {
-      setPage((prevPage) => prevPage - 1);
+      setPage(page - 1);
     }
     console.log(page);
     return;
   }
+
   function lastPage() {
     setPage(totalPages);
     console.log(page);
     return;
   }
+
   function firstPage() {
     setPage(1);
     console.log(page);

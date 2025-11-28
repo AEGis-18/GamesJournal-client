@@ -1,12 +1,20 @@
-import { useState } from "react";
 import { useAllGames } from "../hooks/useAllGames";
 import DisplayGame from "./DisplayGame";
 import { Pagination } from "./Pagination";
 import { SectionTitle } from "./SectionTitle";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 
-export default function GamesCovers() {
-  const [page, setPage] = useState(1);
+type GameCoversProps = {
+  initialPage: number;
+};
+
+export function GamesCovers({ initialPage }: GameCoversProps) {
+  // const [page, setPage] = useState(1);
+  const page = initialPage;
   const { data, isLoading, isError, error } = useAllGames(page);
+
+  const navigate = useNavigate({ from: "/games" });
+  const currentSearch = useSearch({ from: "/games/" });
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -19,6 +27,15 @@ export default function GamesCovers() {
   if (!data || !data.content) {
     return <h1>No games available</h1>;
   }
+
+  const setPage = (newPage: number) => {
+    navigate({
+      search: {
+        ...currentSearch,
+        page: newPage,
+      },
+    });
+  };
 
   return (
     <div className="flex flex-col items-end">
