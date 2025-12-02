@@ -3,7 +3,7 @@ import { getGame } from "../api/game.api";
 
 export function useGame(slug: string) {
   return useQuery({
-    queryKey: ["slug"],
+    queryKey: ["game", slug],
     queryFn: () => getGame(slug),
   });
 }
