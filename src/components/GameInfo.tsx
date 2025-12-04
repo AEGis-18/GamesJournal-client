@@ -1,4 +1,5 @@
 import { useGame } from "@/hooks/useGame";
+import AddButton from "./ui/AddButton";
 
 export function GameInfo({ gameSlug }: { gameSlug: string }) {
   const { data, isLoading, isError, error } = useGame(gameSlug);
@@ -11,8 +12,14 @@ export function GameInfo({ gameSlug }: { gameSlug: string }) {
 
   return (
     <div className="flex flex-col md:flex-row gap-8 flex-wrap">
-      <div className="flex justify-center md:block">
-        <img src={data.coverUrl} width={250} height={375}></img>
+      <div className="flex flex-col items-center mx-auto md:mx-0">
+        <img
+          src={data.coverUrl}
+          alt={data.title}
+          width={250}
+          height={375}
+        ></img>
+        <AddButton className="mt-8  scale-150" size={"lg"} />
       </div>
       <div className="w-auto">
         <h2 className="text-5xl max-w-2xl ">{data.title}</h2>

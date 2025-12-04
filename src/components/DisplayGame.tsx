@@ -1,10 +1,11 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import type { Game } from "../types/GameTypes";
 import { useAuth } from "./AuthProviders";
 import { Button } from "./ui/button";
 
 export default function DisplayGame({ game }: { game: Game }) {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <li
@@ -14,7 +15,10 @@ export default function DisplayGame({ game }: { game: Game }) {
       <img
         src={game.coverUrl}
         alt={game.title}
-        className="w-full h-full object-cover group-hover:brightness-50 transition-opacity duration-300 ease-in-out"
+        className="w-full h-full object-cover group-hover:brightness-50 transition-opacity duration-300 ease-in-out hover:cursor-pointer"
+        onClick={() =>
+          navigate({ to: "/games/$gameSlug", params: { gameSlug: game.slug } })
+        }
       />
       <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 transform translate-y-10 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
         <h4 className=" text-white text-shadow-lg font-bold p-2 ">
