@@ -1,4 +1,3 @@
-import { useNavigate } from "@tanstack/react-router";
 import { Button } from "./button";
 
 type AddButtonProps = {
@@ -12,15 +11,14 @@ type AddButtonProps = {
     | "icon-lg"
     | null
     | undefined;
+  onClick: () => void;
 };
 
-export default function AddButton({ className, size }: AddButtonProps) {
-  const navigate = useNavigate();
-  function onClick() {
-    console.log("click");
-    navigate({ to: "/games/test" });
-  }
-
+export default function AddButton({
+  className,
+  size,
+  onClick,
+}: AddButtonProps) {
   return (
     <div className="-skew-x-12 hover:scale-[115%] transform transition-transform">
       <Button
