@@ -3,7 +3,13 @@ import type { Game } from "../types/GameTypes";
 import { useAuth } from "./AuthProviders";
 import { Button } from "./ui/button";
 
-export default function DisplayGame({ game }: { game: Game }) {
+export default function DisplayGame({
+  game,
+  onOpen,
+}: {
+  game: Game;
+  onOpen: () => void;
+}) {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -27,7 +33,7 @@ export default function DisplayGame({ game }: { game: Game }) {
         <div className="-skew-x-12">
           {isAuthenticated && (
             <Button
-              onClick={() => console.log("click")}
+              onClick={onOpen}
               size={"sm"}
               className="bg-green-700 rounded-none hover:scale-[115%]"
             >

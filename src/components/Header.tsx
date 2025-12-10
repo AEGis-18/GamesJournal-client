@@ -7,7 +7,7 @@ export default function Header() {
       <header className="flex justify-start -skew-x-12 mx-2">
         <Link to="/" className="hover:bg-white hover:text-black p-2 m-0 ">
           <img
-            src="../src/assets/logo-alt.svg"
+            src="./src/assets/logo-alt.svg"
             className="h-10 w-10 skew-x-12"
           />
         </Link>

@@ -1,20 +1,8 @@
 import { useGame } from "@/hooks/useGame";
 import AddButton from "./ui/AddButton";
-import { useState } from "react";
-import { Modal } from "./ui/Modal";
-import AddToJournalForm from "./AddToJournalForm";
 
 export function GameInfo({ gameSlug }: { gameSlug: string }) {
   const { data, isLoading, isError, error } = useGame(gameSlug);
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -34,7 +22,8 @@ export function GameInfo({ gameSlug }: { gameSlug: string }) {
         <AddButton
           className="mt-8  scale-150"
           size={"lg"}
-          onClick={handleOpen}
+          gameTitle={data.title}
+          gameCoverUrl={data.coverUrl}
         />
       </div>
       <div className="w-auto">
@@ -79,9 +68,9 @@ export function GameInfo({ gameSlug }: { gameSlug: string }) {
             })}
           </ul>
         </section>
-        <Modal isOpen={open} onClose={handleClose}>
+        {/* <Modal isOpen={open} onClose={handleClose}>
           <AddToJournalForm title={data.title} url={data.coverUrl} />
-        </Modal>
+        </Modal> */}
       </div>
     </div>
   );
