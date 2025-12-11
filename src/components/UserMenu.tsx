@@ -39,14 +39,14 @@ export default function UserMenu() {
           {auth ? (
             <>
               <DropdownMenuItem className=" px-3 rounded-t-md py-2 cursor-pointer data-highlighted:bg-white data-highlighted:text-black">
-                <Link to="/">
+                <Link to="/profile">
                   <h2 className="">Profile</h2>
                 </Link>
               </DropdownMenuItem>
-
+              {/* 
               <DropdownMenuItem className="px-3 py-2 cursor-pointer data-highlighted:bg-white data-highlighted:text-black">
                 <h2 className="m-0">Settings</h2>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
 
               <DropdownMenuItem className="px-3 py-2 rounded-b-md cursor-pointer data-highlighted:bg-white data-highlighted:text-black">
                 <h2 className="m-0" onClick={handleLogOut}>
