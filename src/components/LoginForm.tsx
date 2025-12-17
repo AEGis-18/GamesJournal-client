@@ -28,9 +28,10 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         setAuth(response);
         onSuccess();
       }
-    } catch {
+    } catch (error) {
       setError("root", { message: "Username or password do not match" });
       console.log("login failed");
+      console.log("Error:", error);
     }
   };
 

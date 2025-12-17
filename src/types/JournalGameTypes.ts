@@ -4,3 +4,7 @@ export type JournalGame = {
   score: number;
   comment: string;
 };
+
+export type JournalResponse = {
+  journalId: number;
+};
