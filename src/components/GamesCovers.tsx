@@ -65,13 +65,11 @@ export function GamesCovers({ initialPage }: GameCoversProps) {
       <div className="rounded-md shadow-md bg-neutral-900 shadow-blue-800 mx-4 py-4">
         <ul className="flex flex-wrap justify-center">
           {data.content.map((game) => (
-            <>
-              <DisplayGame
-                key={game.id}
-                game={game}
-                onOpen={() => handleOpen(game)}
-              ></DisplayGame>
-            </>
+            <DisplayGame
+              key={game.id}
+              game={game}
+              onOpen={() => handleOpen(game)}
+            ></DisplayGame>
           ))}
         </ul>
       </div>

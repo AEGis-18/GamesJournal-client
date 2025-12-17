@@ -89,7 +89,7 @@ export function AuthProvider({ children }: Props) {
 
           try {
             const { data }: { data: ResponseToken } = await axios.post(
-              "http://localhost:8000/api/token/refresh/",
+              "http://localhost:8080/api/token/refresh-token/",
               {},
               { withCredentials: true }
             );
