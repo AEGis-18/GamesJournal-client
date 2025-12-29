@@ -89,20 +89,21 @@ export function AuthProvider({ children }: Props) {
 
           try {
             const { data }: { data: ResponseToken } = await axios.post(
-              "http://localhost:8080/api/token/refresh-token/",
+              "http://localhost:8080/api/auth/refresh-token",
               {},
               { withCredentials: true }
             );
-            //            console.log("Interceptor data:", response.data);
+            // console.log("Interceptor data:", data);
             setAuth(data);
 
-            originalRequest.headers.Authorization = `Bearer ${data.token}`;
+            originalRequest.headers["Authorization"] = `Bearer ${data.token}`;
 
             return Api(originalRequest);
-          } catch (error) {
-            console.log("Refresh request failed: ", error);
+          } catch (refreshError) {
+            console.log("Refresh request failed: ", refreshError);
 
             setAuth(undefined);
+            return Promise.reject(refreshError);
           }
         }
         return Promise.reject(error);
