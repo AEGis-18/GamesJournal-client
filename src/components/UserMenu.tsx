@@ -8,9 +8,11 @@ import { useAuth } from "./AuthProviders";
 import { Link } from "@tanstack/react-router";
 import { MyCard } from "./ui/MyCard";
 import { signOut } from "@/api/token.api";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function UserMenu() {
   const { auth, setAuth } = useAuth();
+  const queryClient = useQueryClient();
 
   async function handleLogOut() {
     try {
@@ -19,8 +21,9 @@ export default function UserMenu() {
       if (res.status === 200) {
         setAuth(undefined);
       }
-      if (res.status === 200) {
-      }
+      // if (res.status === 200) {
+      // }
+      queryClient.clear();
     } catch (e) {
       console.log(e);
     }

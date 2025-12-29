@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "./button";
 import { Modal } from "./Modal";
-import AddToJournalForm from "../AddToJournalForm";
+import { AddToJournalForm } from "../AddToJournalForm";
 
 type AddButtonProps = {
   className: string;
@@ -17,6 +17,7 @@ type AddButtonProps = {
   // onClick: () => void;
   gameTitle: string;
   gameCoverUrl: string;
+  gameId: number;
 };
 
 export default function AddButton({
@@ -25,6 +26,7 @@ export default function AddButton({
   // onClick,
   gameTitle,
   gameCoverUrl,
+  gameId,
 }: AddButtonProps) {
   const [open, setOpen] = useState(false);
 
@@ -48,7 +50,11 @@ export default function AddButton({
         </Button>
       </div>
       <Modal isOpen={open} onClose={handleClose}>
-        <AddToJournalForm title={gameTitle} url={gameCoverUrl} />
+        <AddToJournalForm
+          title={gameTitle}
+          url={gameCoverUrl}
+          gameId={gameId}
+        />
       </Modal>
     </>
   );

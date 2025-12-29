@@ -2,6 +2,9 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { SectionTitle } from "./SectionTitle";
 import { Button } from "./ui/button";
 import GameInfoBox from "./ui/GameInfoBox";
+import type { JournalGame } from "@/types/JournalGameTypes";
+import { useJournalId } from "@/hooks/useJournalId";
+import { addJournalEntry } from "@/api/journal.api";
 
 type FormFields = {
   score: number;
@@ -11,9 +14,10 @@ type FormFields = {
 type TitleInfo = {
   title: string;
   url: string;
+  gameId: number;
 };
 
-export default function AddToJournalForm({ title, url }: TitleInfo) {
+export function AddToJournalForm({ title, url, gameId }: TitleInfo) {
   const {
     register,
     handleSubmit,
@@ -21,22 +25,38 @@ export default function AddToJournalForm({ title, url }: TitleInfo) {
     formState: { errors, isSubmitting },
   } = useForm<FormFields>();
 
+  const {
+    data: journal,
+    isSuccess: isJournalLoaded,
+    isLoading: isLoadingJournal,
+  } = useJournalId();
+
   const onSubmmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      // const response = await login(data.username, data.password);
-      // if (response) {
-      //   console.log(response);
-      //   setAuth(response);
-      //   onSuccess();
-      // }
-      console.log(data);
-    } catch {
-      setError("root", { message: "Username or password do not match" });
-      console.log("login failed");
+      if (!isJournalLoaded || !journal?.journalId) {
+        setError("root", {
+          message: "Journal not found. Please log in again.",
+        });
+        return;
+      }
+
+      const journalEntry: JournalGame = {
+        journalId: journal.journalId,
+        gameId: gameId,
+        score: data.score,
+        comment: data.comment,
+      };
+      console.log(journalEntry);
+      const res = await addJournalEntry(journalEntry);
+      console.log(res);
+    } catch (error) {
+      setError("root", { message: "Error while sending entry" });
+      console.log(error);
     }
   };
 
   const scoreValues = Array.from({ length: 10 }, (_, i) => i + 1);
+
   return (
     <GameInfoBox>
       <div className="mr-4">
@@ -58,7 +78,7 @@ export default function AddToJournalForm({ title, url }: TitleInfo) {
             <select
               id="score-select"
               className="m-2 pr-1 rounded-md border border-white shadow-sm bg-neutral-900 text-right"
-              {...register("score")}
+              {...register("score", { valueAsNumber: true })}
             >
               <option value="" className="">
                 --
@@ -82,7 +102,7 @@ export default function AddToJournalForm({ title, url }: TitleInfo) {
             <Button
               className="bg-green-700 rounded-none scale-150"
               size={"sm"}
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoadingJournal}
             >
               <h3 className="skew-x-12">Add</h3>
             </Button>

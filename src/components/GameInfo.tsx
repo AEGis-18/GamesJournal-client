@@ -24,6 +24,7 @@ export function GameInfo({ gameSlug }: { gameSlug: string }) {
           size={"lg"}
           gameTitle={data.title}
           gameCoverUrl={data.coverUrl}
+          gameId={data.id}
         />
       </div>
       <div className="w-auto">

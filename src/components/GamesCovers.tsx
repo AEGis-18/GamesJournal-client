@@ -5,7 +5,7 @@ import { Pagination } from "./Pagination";
 import { SectionTitle } from "./SectionTitle";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { Modal } from "./ui/Modal";
-import AddToJournalForm from "./AddToJournalForm";
+import { AddToJournalForm } from "./AddToJournalForm";
 import type { Game } from "@/types/GameTypes";
 
 type GameCoversProps = {
@@ -79,6 +79,7 @@ export function GamesCovers({ initialPage }: GameCoversProps) {
             <AddToJournalForm
               title={gameToAdd.title}
               url={gameToAdd.coverUrl}
+              gameId={gameToAdd.id}
             ></AddToJournalForm>
           </Modal>
         </div>

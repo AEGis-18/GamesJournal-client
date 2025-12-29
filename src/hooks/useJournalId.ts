@@ -7,7 +7,7 @@ export function useJournalId() {
   return useQuery({
     queryKey: ["journal"],
     queryFn: () => getJournalId(),
-    enabled: !!auth?.username,
+    enabled: !!auth,
     retry: false,
   });
 }
