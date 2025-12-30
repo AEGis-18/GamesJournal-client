@@ -5,6 +5,7 @@ import GameInfoBox from "./ui/GameInfoBox";
 import type { JournalGame } from "@/types/JournalGameTypes";
 import { useJournalId } from "@/hooks/useJournalId";
 import { addJournalEntry } from "@/api/journal.api";
+import { toast } from "react-toastify";
 
 type FormFields = {
   score: number;
@@ -46,9 +47,27 @@ export function AddToJournalForm({ title, url, gameId }: TitleInfo) {
         score: data.score,
         comment: data.comment,
       };
-      console.log(journalEntry);
+      // console.log(journalEntry);
       const res = await addJournalEntry(journalEntry);
+
       console.log(res);
+
+      if (res.status === 200 || res.status === 201) {
+        console.log("Game added");
+        toast.success("Game added", {
+          className:
+            "!rounded-md !border-none !shadow-md !bg-neutral-900 !shadow-blue-800 !mx-4 !py-4 !font-bold",
+          position: "bottom-right",
+          theme: "colored",
+          closeButton: false,
+          progressClassName: "!bg-blue-500 ",
+          icon: false,
+          autoClose: 1250,
+        });
+      } else {
+        setError("root", { message: "Error while adding game. Try again" });
+        return;
+      }
     } catch (error) {
       setError("root", { message: "Error while sending entry" });
       console.log(error);
