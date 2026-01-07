@@ -4,6 +4,7 @@ import { type AuthContextType } from "../components/AuthProviders";
 import type { QueryClient } from "@tanstack/react-query";
 import { Footer } from "@/components/Footer";
 import Header from "@/components/Header";
+import { ToastContainer } from "react-toastify";
 
 export interface MyRouterContext {
   auth: AuthContextType;
@@ -18,6 +19,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         <Outlet />
       </div>
       <Footer />
+      <ToastContainer />
       <TanStackRouterDevtools position="bottom-right" initialIsOpen={false} />
     </div>
   ),
