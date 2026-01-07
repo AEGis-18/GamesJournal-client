@@ -27,6 +27,8 @@ export type AuthContextType = {
   isAuthenticated: boolean;
 };
 
+const URL = import.meta.env.VITE_BACKEND_AUTH_URL;
+
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = () => {
@@ -48,7 +50,7 @@ export function AuthProvider({ children }: Props) {
       try {
         console.log("Checking access cookies");
         const { data }: { data: ResponseToken } = await axios.post(
-          "http://localhost:8080/api/auth/refresh-token",
+          `${URL}refresh-token`,
           {},
           { withCredentials: true }
         );
@@ -89,7 +91,7 @@ export function AuthProvider({ children }: Props) {
 
           try {
             const { data }: { data: ResponseToken } = await axios.post(
-              "http://localhost:8080/api/auth/refresh-token",
+              `${URL}refresh-token`,
               {},
               { withCredentials: true }
             );
